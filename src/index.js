@@ -3,7 +3,9 @@ const app = express()
 const path = require("path")
 const hbs = require("hbs")
 const collection=require("./mongodb")
+
 const templatePath = path.join(__dirname,'./templates')
+
 
 app.get('/home.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'home.html'));
