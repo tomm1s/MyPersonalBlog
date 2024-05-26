@@ -42,7 +42,28 @@ app.get('/script.js', (req, res) => {
 app.get('/videofile.mp4', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'videofile.mp4'));
 });
-
+app.get('/login.css', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'login.css'));
+});
+app.get('/signup.css', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'signup.css'));
+});
+app.get('/style.css', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'style.css'));
+});
+app.get('/background.jpg', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'background.jpg'));
+});
+app.get('/home', (req, res) => {
+    // Instead of rendering an HBS file, serve the "home.html" file directly
+    res.sendFile(__dirname + '/public/home.html');
+  });
+  app.get('/moon.jpg', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'moon.jpg'));
+});
+app.get('/Youtube_logo.png', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'Youtube_logo.png'));
+});
 app.use(express.json())
 app.set("view engine","hbs")
 app.set("views",templatePath)
@@ -64,7 +85,7 @@ const data={
 
 await collection.insertMany([data])
 
-res.render("home")
+res.redirect("/home");
 
 })
 
@@ -74,7 +95,7 @@ app.post('/login', async (req, res) => {
         const check = await collection.findOne({name:req.body.name})
 
         if(check.password ===req.body.password){
-            res.render("home")
+            res.redirect("/home");
         }
         else{
             res.send("wrong password")
